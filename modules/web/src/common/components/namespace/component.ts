@@ -46,8 +46,8 @@ export class NamespaceSelectorComponent implements OnInit, OnDestroy {
   resourceNamespaceParam: string;
   usingFallbackNamespaces = false;
 
-  private readonly namespaceUpdate_ = new Subject<void>();
-  private readonly unsubscribe_ = new Subject<void>();
+  private namespaceUpdate_ = new Subject<void>();
+  private unsubscribe_ = new Subject<void>();
   private readonly endpoint_ = EndpointManager.resource(Resource.namespace);
 
   @ViewChild(MatSelect, {static: true}) private readonly select_: MatSelect;
@@ -172,7 +172,6 @@ export class NamespaceSelectorComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe_))
       .subscribe(
         namespaceList => {
-          this.usingFallbackNamespaces = false;
           const namespacesTemp = namespaceList.namespaces.map(n => n.objectMeta.name);
           // console.log('namespacesTemp', namespacesTemp);
 
@@ -182,8 +181,9 @@ export class NamespaceSelectorComponent implements OnInit, OnDestroy {
             }
           }
           for (const namespace of namespacesTemp) {
-            // console.log('traitement du namespace : ' + namespace);
-            this.checkNamespaces_(namespace);
+            if (this.namespaces.indexOf(namespace) === -1) {
+              this.checkNamespaces_(namespace);
+            }
           }
           // console.log('namespaces', this.namespaces);
         },
@@ -202,20 +202,16 @@ export class NamespaceSelectorComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe(
         podList => {
-          if (podList.errors.length === 0) {
-            if (this.namespaces.indexOf(namespaceName) === -1) {
-              // console.log(namespaceName + ' autorisé et non présent. Ajout');
-              this.namespaces = [...this.namespaces, namespaceName];
-              this.namespaces = this.namespaces.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+          if (this.namespaces.indexOf(namespaceName) === -1) {
+            if (podList.errors.length === 0) {
+              console.log(namespaceName + ' is allowed. Adding');
+              this.namespaces.push(namespaceName);
             } else {
-              // console.log(namespaceName + ' is already in the list');
-            }
-          } else {
-            const index = this.namespaces.indexOf(namespaceName, 0);
-            if (index > -1) {
-              // console.log(namespaceName + ' interdit et présent. Suppression');
-              this.namespaces = [...this.namespaces.slice(0, index), ...this.namespaces.slice(index + 1)];
-              this.namespaces = this.namespaces.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+              const index = this.namespaces.indexOf(namespaceName, 0);
+              if (index > -1) {
+                console.log(namespaceName + ' is forbidden. Deleting');
+                this.namespaces.splice(index, 1);
+              }
             }
           }
         },
