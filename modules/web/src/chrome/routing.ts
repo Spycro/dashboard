@@ -134,6 +134,15 @@ const routes: Routes = [
         loadChildren: () => import('resource/discovery/ingressclass/module').then(m => m.IngressClassModule),
       },
       {
+        path: 'ingressroute',
+        loadChildren: () => import('resource/discovery/ingressroute/module').then(m => m.IngressRouteModule),
+      },
+      {
+        path: 'ingressroutetcp',
+        loadChildren: () => import('resource/discovery/ingressroutetcp/module').then(m => m.IngressRouteTCPModule),
+      },
+
+      {
         path: 'service',
         loadChildren: () => import('resource/discovery/service/module').then(m => m.ServiceModule),
       },

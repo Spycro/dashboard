@@ -274,10 +274,6 @@
         <source> Deploy </source>
         <target state="new"> Desplegar </target>
       </trans-unit>
-      <trans-unit id="1813894172148248223" datatype="html">
-        <source>Ingress Classes </source>
-        <target state="new">Ingress Classes </target>
-      </trans-unit>
       <trans-unit id="1828068287723658160" datatype="html">
         <source>Failed: </source>
         <target state="new">Fallido :</target>
@@ -2068,10 +2064,6 @@
         <source>Workloads</source>
         <target>Cargas de trabajo</target>
       </trans-unit>
-      <trans-unit id="7927427229271598667" datatype="html">
-        <source> Make sure that support for basic authentication is enabled in the cluster. To find out more about how to configure basic authentication, please refer to the <x id="START_LINK" ctype="x-a" equiv-text="&quot;\uFFFD#2\uFFFD&quot;"/>Authenticating<x id="CLOSE_LINK" ctype="x-a" equiv-text="&quot;[\uFFFD/#2\uFFFD|\uFFFD/#3\uFFFD]&quot;"/> and <x id="START_LINK_1" equiv-text="&quot;\uFFFD#3\uFFFD&quot;"/>ABAC Mode<x id="CLOSE_LINK" ctype="x-a" equiv-text="&quot;[\uFFFD/#2\uFFFD|\uFFFD/#3\uFFFD]&quot;"/> sections. </source>
-        <target state="new">Asegúrate que el soporte para la autenticación básica está habilitada en el clúster. Para encontrar información sobre cómo configurar la autenticación básica, referirse a las secciones <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Autenticarse<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y <x id="START_LINK_1" ctype="x-a" equiv-text="&lt;a&gt;"/>Modo ABAC<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
-      </trans-unit>
       <trans-unit id="7941428823403788384" datatype="html">
         <source> Create </source>
         <target state="new"> Crear </target>
@@ -2455,6 +2447,50 @@
       <trans-unit id="97066167691656299" datatype="html">
         <source>Provisioner</source>
         <target>Aprovisionador</target>
+      </trans-unit>
+      <trans-unit id="5365297951261797365" datatype="html">
+        <source>IngressRouteTCPs </source>
+        <target state="new">IngressRouteTCPs </target>
+      </trans-unit>
+      <trans-unit id="6060619257650890968" datatype="html">
+        <source>IngressRoutes</source>
+        <target state="new">IngressRoutes</target>
+      </trans-unit>
+      <trans-unit id="2632454463313076265" datatype="html">
+        <source>IngressRoutesTCP</source>
+        <target state="new">IngressRoutesTCP</target>
+      </trans-unit>
+      <trans-unit id="4134277968711566299" datatype="html">
+        <source> Hosts </source>
+        <target state="new"> Hosts </target>
+      </trans-unit>
+      <trans-unit id="8890401224023450705" datatype="html">
+        <source>Entrypoints</source>
+        <target state="new">Entrypoints</target>
+      </trans-unit>
+      <trans-unit id="1813894172148248223" datatype="html">
+        <source>Ingress Classes </source>
+        <target state="new">Ingress Classes </target>
+      </trans-unit>
+      <trans-unit id="6175940703350311460" datatype="html">
+        <source>IngressRouteTCPs</source>
+        <target state="new">IngressRouteTCPs</target>
+      </trans-unit>
+      <trans-unit id="1784168874629208042" datatype="html">
+        <source> Match </source>
+        <target state="new"> Match </target>
+      </trans-unit>
+      <trans-unit id="7260804917752247227" datatype="html">
+        <source> Service </source>
+        <target state="new"> Service </target>
+      </trans-unit>
+      <trans-unit id="5981681848320514663" datatype="html">
+        <source> Service Port </source>
+        <target state="new"> Service Port </target>
+      </trans-unit>
+      <trans-unit id="8225641011747898568" datatype="html">
+        <source> Match <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&quot;\uFFFD#2\uFFFD&quot;"/>open_in_new<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&quot;\uFFFD/#2\uFFFD&quot;"/></source>
+        <target state="new"> Match <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&quot;\uFFFD#2\uFFFD&quot;"/>open_in_new<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&quot;\uFFFD/#2\uFFFD&quot;"/></target>
       </trans-unit>
     </body>
   </file>

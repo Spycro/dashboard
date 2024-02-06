@@ -80,6 +80,8 @@ import {EventListComponent} from './resourcelist/event/component';
 import {HorizontalPodAutoscalerListComponent} from './resourcelist/horizontalpodautoscaler/component';
 import {IngressClassListComponent} from './resourcelist/ingressclass/component';
 import {IngressListComponent} from './resourcelist/ingress/component';
+import {IngressRouteListComponent} from './resourcelist/ingressroute/component';
+import {IngressRouteTCPListComponent} from './resourcelist/ingressroutetcp/component';
 import {JobListComponent} from './resourcelist/job/component';
 import {NamespaceListComponent} from './resourcelist/namespace/component';
 import {NetworkPolicyListComponent} from './resourcelist/networkpolicy/component';
@@ -149,6 +151,8 @@ const components = [
   HorizontalPodAutoscalerListComponent,
   IngressClassListComponent,
   IngressListComponent,
+  IngressRouteListComponent,
+  IngressRouteTCPListComponent,
   IngressRuleFlatListComponent,
   InternalEndpointComponent,
   JobListComponent,

@@ -1,0 +1,151 @@
+<!--
+Copyright 2017 The Kubernetes Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<kd-object-meta [initialized]="isInitialized"
+                [objectMeta]="ingressroutetcp?.objectMeta"></kd-object-meta>
+
+<!-- EntryPoints Block -->
+<kd-card *ngIf="ingressroutetcp?.spec?.entryPoints?.length > 0"
+         [initialized]="isInitialized">
+  <div title>EntryPoints</div>
+  <div content *ngIf="isInitialized" fxLayout="row wrap">
+    <kd-property fxFlex="100">
+      <div value>
+        <div *ngFor="let entryPoint of ingressroutetcp.spec.entryPoints">
+          {{ entryPoint }}
+        </div>
+      </div>
+    </kd-property>
+  </div>
+</kd-card>
+
+
+<!-- Routes Block -->
+<kd-card *ngIf="ingressroutetcp?.spec?.routes?.length > 0" [initialized]="isInitialized">
+  <div title>Routes</div>
+  <div content *ngIf="isInitialized">
+    <mat-table [dataSource]="ingressroutetcp.spec.routes">
+      <!-- Match Column -->
+      <ng-container matColumnDef="match">
+        <mat-header-cell *matHeaderCellDef
+                         disableClear="true"
+                         class="col-stretch-xl"
+                         i18n>
+                         Match
+        </mat-header-cell>                         
+        <mat-cell *matCellDef="let route"
+                  class="col-stretch-xl">
+                  {{ route.match }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Service Name Column -->
+      <ng-container matColumnDef="serviceName">
+        <mat-header-cell *matHeaderCellDef
+                         disableClear="true"
+                         class="col-stretch-xl"
+                         i18n>
+                         Service
+        </mat-header-cell> 
+        <mat-cell *matCellDef="let route"
+                  class="col-stretch-xl">
+                  <ul style="list-style-type: none; padding: 0;">
+                    <li *ngFor="let service of route.services">
+                      <a [routerLink]="getServiceHref(service.name, ingressroutetcp?.objectMeta?.namespace)" queryParamsHandling="preserve">
+                        {{ service.name }}
+                      </a>
+                    </li>
+                  </ul>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Service Port Column -->
+      <ng-container matColumnDef="servicePort">
+        <mat-header-cell *matHeaderCellDef
+                         disableClear="true"
+                         class="col-stretch-xl"
+                         i18n>
+                         Service Port
+        </mat-header-cell> 
+        <mat-cell *matCellDef="let route"
+                  class="col-stretch-xl">
+                  <ul style="list-style-type: none; padding: 0;">
+                    <li *ngFor="let service of route.services">
+                      {{ service.port }}
+                    </li>
+                  </ul>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['match', 'serviceName', 'servicePort']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['match', 'serviceName', 'servicePort']"></mat-row>
+    </mat-table>
+  </div>
+</kd-card>
+
+
+
+<!-- TLS Block -->
+<kd-card *ngIf="ingressroutetcp?.spec?.tls && !isEmptyObject(ingressroutetcp?.spec?.tls)"
+         [initialized]="isInitialized">
+  <div title>TLS</div>
+  <div content *ngIf="isInitialized" fxLayout="column">
+    <!-- Secret Name -->
+    <kd-property *ngIf="ingressroutetcp.spec.tls.secretName">
+      <div key>Secret Name</div>
+      <div value>{{ ingressroutetcp.spec.tls.secretName }}</div>
+    </kd-property>
+    <!-- Options -->
+    <div *ngIf="ingressroutetcp.spec.tls.options">
+      <div class="kd-muted section-header">Options</div>
+      <kd-property *ngIf="ingressroutetcp.spec.tls.options.name">
+        <div key>Name</div>
+        <div value>{{ ingressroutetcp.spec.tls.options.name }}</div>
+      </kd-property>
+      <kd-property *ngIf="ingressroutetcp.spec.tls.options.namespace">
+        <div key>Namespace</div>
+        <div value>{{ ingressroutetcp.spec.tls.options.namespace }}</div>
+      </kd-property>
+    </div>
+    <!-- Cert Resolver -->
+    <kd-property *ngIf="ingressroutetcp.spec.tls.certResolver">
+      <div key>Cert Resolver</div>
+      <div value>{{ ingressroutetcp.spec.tls.certResolver }}</div>
+    </kd-property>
+    <!-- Domains -->
+    <div *ngIf="ingressroutetcp.spec.tls.domains?.length > 0">
+      <div class="kd-muted section-header">Domains</div>
+      <div fxLayout="column" fxLayoutGap="8px">
+        <div *ngFor="let domain of ingressroutetcp.spec.tls.domains">
+          <!-- Main -->
+          <kd-property *ngIf="domain.main">
+            <div key>Main</div>
+            <div value>{{ domain.main }}</div>
+          </kd-property>
+          <!-- SANs -->
+          <kd-property *ngIf="domain.sans?.length > 0">
+            <div key>SANs</div>
+            <div value>
+              <div *ngFor="let san of domain.sans">
+                {{ san }}
+              </div>
+            </div>
+          </kd-property>
+        </div>
+      </div>
+    </div>
+  </div>
+</kd-card>

@@ -136,6 +136,14 @@ export interface IngressList extends ResourceList {
   items: Ingress[];
 }
 
+export interface IngressRouteList extends ResourceList {
+  items: IngressRoute[];
+}
+
+export interface IngressRouteTCPList extends ResourceList {
+  items: IngressRouteTCP[];
+}
+
 export interface ServiceAccountList extends ResourceList {
   items: ServiceAccount[];
 }
@@ -324,6 +332,24 @@ export interface HorizontalPodAutoscaler extends Resource {
 export interface Ingress extends Resource {
   endpoints: Endpoint[];
   hosts: string[];
+}
+
+export interface TraefikService {
+  name: string;
+  namespace: string;
+  port: number;
+}
+
+export interface IngressRoute extends Resource {
+  endpoints: string[];
+  hosts: string[];
+  service: TraefikService[];
+}
+
+export interface IngressRouteTCP extends Resource {
+  endpoints: string[];
+  hosts: string[];
+  service: TraefikService[];
 }
 
 export interface Job extends Resource {
@@ -521,6 +547,52 @@ export interface SecretDetail extends ResourceDetail {
 }
 
 export type ServiceAccountDetail = ResourceDetail;
+
+export interface IngressRouteDetail extends ResourceDetail {
+  endpoints: Endpoint[];
+  spec: IngressRouteSpec;
+}
+
+export interface IngressRouteSpec {
+  entryPoints: string[];
+  routes: IngressRouteSpecRoute[];
+}
+
+export interface IngressRouteSpecRoute {
+  kind: string;
+  match: string;
+  priority: number;
+  services: IngressRouteSpecRouteService[];
+}
+
+export interface IngressRouteSpecRouteService {
+  name: string;
+  port: number;
+  kind: string;
+}
+
+export interface IngressRouteTCPDetail extends ResourceDetail {
+  endpoints: Endpoint[];
+  spec: IngressRouteTCPSpec;
+}
+
+export interface IngressRouteTCPSpec {
+  entryPoints: string[];
+  routes: IngressRouteTCPSpecRoute[];
+}
+
+export interface IngressRouteTCPSpecRoute {
+  kind: string;
+  match: string;
+  priority: number;
+  services: IngressRouteTCPSpecRouteService[];
+}
+
+export interface IngressRouteTCPSpecRouteService {
+  name: string;
+  port: number;
+  kind: string;
+}
 
 export interface IngressDetail extends ResourceDetail {
   endpoints: Endpoint[];
@@ -1224,6 +1296,7 @@ export interface GlobalSettings {
   disableAccessDeniedNotifications: boolean;
   defaultNamespace: string;
   namespaceFallbackList: string[];
+  primaryColor: string;
 }
 
 export interface PinnedResource {
