@@ -1957,8 +1957,9 @@ func (apiHandler *APIHandler) handleDeleteResource(
 	kind := request.PathParameter("kind")
 	namespace, ok := request.PathParameters()["namespace"]
 	name := request.PathParameter("name")
+	deleteNow := request.QueryParameter("deleteNow") == "true"
 
-	if err := verber.Delete(kind, ok, namespace, name); err != nil {
+	if err := verber.Delete(kind, ok, namespace, name, deleteNow); err != nil {
 		errors.HandleInternalError(response, err)
 		return
 	}
